@@ -1,0 +1,35 @@
+<h2 class="w3-center w3-section">Results for Table: {{ table }}</h2>
+<div class="w3-bar w3-section">
+    <a href="{{ url_for('export_csv', table=table, fields=fields) }}" class="w3-bar-item w3-button" style="width:25%">
+        <img src="static/images/csv-file-format-extension.png" alt="CSV Icon" width="20" height="20"> CSV
+    </a>
+    <a href="{{ url_for('export_pdf', table=table, fields=fields) }}" class="w3-bar-item w3-button" style="width:25%">
+        <img src="static/images/pdf-file-format-extension.png" alt="PDF Icon" width="20" height="20"> PDF
+    </a>
+    <a href="{{ url_for('export_xml', table=table, fields=fields) }}" class="w3-bar-item w3-button" style="width:25%">
+        <img src="static/images/xml-file-format-extension.png" alt="XML Icon" width="20" height="20"> XML
+    </a>
+    <a href="{{ url_for('export_json', table=table, fields=fields) }}" class="w3-bar-item w3-button" style="width:25%">
+        <img src="static/images/json-file-format-extension.png" alt="JSON Icon" width="20" height="20"> JSON
+    </a>
+</div>
+<table class="w3-table-all w3-hoverable" id="data_table">
+    <thead>
+    <tr>
+        {% for field in fields %}
+        <th onclick="w3.sortHTML('#data_table', '.item', 'td:nth-child({{ loop.index }})')" style="cursor:pointer">
+            {{ field }} &#x25be;
+        </th>
+        {% endfor %}
+    </tr>
+    </thead>
+    <tbody>
+    {% for row in data %}
+    <tr class="item">
+        {% for value in row %}
+        <td>{{ value }}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
